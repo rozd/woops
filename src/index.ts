@@ -1,7 +1,6 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { Woops } from './Woops';
-import { WoopsOptions } from './WoopsOptions';
-
+export { default as woopsExceptionHandler } from './handler/exceptionHandler';
 
 declare global {
   namespace Express {
@@ -9,15 +8,14 @@ declare global {
       woops?: Woops
     }
   }
+  namespace Woops {
+    interface WoopsOptions {
+      shouldIncludeErrorStack?: boolean
+    }
+  }
 }
 
-export const woopsErrorHandler = (error: Error, req: Request, res: Response, next: NextFunction) => {
-  if (res.woops) {
-    res.woops.send(error);
-  }
-};
-
-export default (options: WoopsOptions) => {
+export default function woops(options?: Woops.WoopsOptions): RequestHandler {
   return (req: Request, res: Response, next: NextFunction) => {
     if (res.woops) {
       throw new Error('Woops already exists on the response object.');

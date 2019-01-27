@@ -1,5 +1,5 @@
 import { httpResponseCodes } from './httpResponseCodes';
-import { WoopsOptions } from './WoopsOptions';
+import { Woops } from './Woops';
 
 export class WoopsError extends Error {
 
@@ -41,7 +41,7 @@ export class WoopsError extends Error {
     return obj;
   }
 
-  public toPayload(options: WoopsOptions): object {
+  public toPayload(options: Woops.WoopsOptions): object {
     const payload: WoopsErrorPayload = {
       statusCode: this.status,
       error: httpResponseCodes.get(this.status) || "Unknown",

@@ -1,5 +1,4 @@
 import { Woops } from '../src/Woops';
-import { WoopsOptions } from '../src/WoopsOptions';
 
 import { Response } from 'jest-express/lib/response';
 import { WoopsError } from '../lib/WoopsError';
@@ -10,7 +9,7 @@ describe('Woops', () => {
 
     it('should send error with headers', () => {
       const response = new Response();
-      const woops = new Woops(response as any, new WoopsOptions());
+      const woops = new Woops(response as any);
       const error = WoopsError.woopsify(new Error('Test error'));
       error.headers = new Map<string, string>([["Header", "Value"]]);
       woops.send(error);
@@ -19,7 +18,7 @@ describe('Woops', () => {
 
     it('should send any error as Internal Server Error', () => {
       const response = new Response();
-      const woops = new Woops(response as any, new WoopsOptions());
+      const woops = new Woops(response as any);
       woops.send(new Error('Test error'));
       expect(response.status).toBeCalledWith(500);
       expect(response.send).toBeCalledWith(expect.objectContaining({statusCode: 500, error: 'Internal Server Error'}));

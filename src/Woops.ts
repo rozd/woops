@@ -1,6 +1,5 @@
 import { Response } from "express";
 import { WoopsError } from './WoopsError';
-import { WoopsOptions } from './WoopsOptions';
 
 export class Woops {
 
@@ -174,13 +173,13 @@ export class Woops {
   // MARK: Properties
 
   protected response: Response;
-  protected options: WoopsOptions;
+  protected options: Woops.WoopsOptions;
 
   // MARK: Constructor
 
-  constructor(response: Response, options?: WoopsOptions) {
+  constructor(response: Response, options?: Woops.WoopsOptions) {
     this.response = response;
-    this.options  = options || new WoopsOptions();
+    this.options  = options || { shouldIncludeErrorStack: false };
   }
 
   // MARK: - Errors
