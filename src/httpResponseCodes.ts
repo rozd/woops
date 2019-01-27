@@ -35,7 +35,7 @@ export const httpResponseCodes = new Map<number, string>([
   [415, 'Unsupported Media Type'],
   [416, 'Requested Range Not Satisfiable'],
   [417, 'Expectation Failed'],
-  [418, 'I\'m a teapot'],
+  [418, "I'm a teapot"],
   [422, 'Unprocessable Entity'],
   [423, 'Locked'],
   [424, 'Failed Dependency'],
@@ -55,5 +55,5 @@ export const httpResponseCodes = new Map<number, string>([
   [507, 'Insufficient Storage'],
   [509, 'Bandwidth Limit Exceeded'],
   [510, 'Not Extended'],
-  [511, 'Network Authentication Required']
+  [511, 'Network Authentication Required'],
 ]);

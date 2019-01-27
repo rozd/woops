@@ -5,4 +5,4 @@ export default function exceptionHandler(error: Error, req: Request, res: Respon
     res.woops.send(error);
   }
   next(error);
-};
+}

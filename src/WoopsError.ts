@@ -2,9 +2,8 @@ import { httpResponseCodes } from './httpResponseCodes';
 import { Woops } from './Woops';
 
 export class WoopsError extends Error {
-
   public static isWoopsError(error: Error): error is WoopsError {
-    return (error as WoopsError).isWoopsError
+    return (error as WoopsError).isWoopsError;
   }
 
   public static woopsify(error: Error): WoopsError {
@@ -36,7 +35,7 @@ export class WoopsError extends Error {
   public headersAsObject(): object {
     const obj: any = {};
     if (this.headers) {
-      this.headers.forEach((value, key) => obj[key] = value);
+      this.headers.forEach((value, key) => (obj[key] = value));
     }
     return obj;
   }
@@ -44,9 +43,9 @@ export class WoopsError extends Error {
   public toPayload(options: Woops.WoopsOptions): object {
     const payload: WoopsErrorPayload = {
       statusCode: this.status,
-      error: httpResponseCodes.get(this.status) || "Unknown",
+      error: httpResponseCodes.get(this.status) || 'Unknown',
       errorMessage: this.message,
-      data: this.data
+      data: this.data,
     };
     if (this.isDeveloperError) {
       payload.isDeveloperError = true;
@@ -59,7 +58,6 @@ export class WoopsError extends Error {
     }
     return payload;
   }
-
 }
 
 interface WoopsErrorPayload {

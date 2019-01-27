@@ -1,6 +1,6 @@
 {
   "name": "woops",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "description": "HTTP error manager for Express.js",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",

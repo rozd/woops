@@ -1,8 +1,7 @@
-import { Response } from "express";
+import { Response } from 'express';
 import { WoopsError } from './WoopsError';
 
 export class Woops {
-
   // 4xx Client Errors
 
   public static badRequest(message: string, data?: any): WoopsError {
@@ -10,7 +9,6 @@ export class Woops {
   }
 
   public static unauthorized(message?: string, scheme?: any, attributes?: any): WoopsError {
-
     let wwwAuthenticateHeaderValue: string | undefined;
 
     if (typeof scheme === 'string') {
@@ -18,11 +16,15 @@ export class Woops {
 
       if (attributes) {
         if (typeof attributes === 'string') {
-          wwwAuthenticateHeaderValue += " " + encodeURIComponent(attributes);
+          wwwAuthenticateHeaderValue += ' ' + encodeURIComponent(attributes);
         } else {
-          wwwAuthenticateHeaderValue += " " + Object.keys(attributes).map(key => {
-            return `${key}="${encodeURIComponent((attributes[key] || '').toString())}"`
-          }).join(', ');
+          wwwAuthenticateHeaderValue +=
+            ' ' +
+            Object.keys(attributes)
+              .map(key => {
+                return `${key}="${encodeURIComponent((attributes[key] || '').toString())}"`;
+              })
+              .join(', ');
         }
       }
     }
@@ -32,7 +34,7 @@ export class Woops {
       headers = new Map([['WWW-Authenticate', wwwAuthenticateHeaderValue]]);
     }
 
-    return new WoopsError(401, message || "Unauthorized", null, headers);
+    return new WoopsError(401, message || 'Unauthorized', null, headers);
   }
 
   public static paymentRequired(message: string, data?: any): WoopsError {
@@ -48,7 +50,6 @@ export class Woops {
   }
 
   public static methodNotAllowed(message: string, data?: any, allow?: any): WoopsError {
-
     let allowHeaderValue: string | undefined;
     if (allow) {
       if (Array.isArray(allow)) {
@@ -179,7 +180,7 @@ export class Woops {
 
   constructor(response: Response, options?: Woops.WoopsOptions) {
     this.response = response;
-    this.options  = options || { shouldIncludeErrorStack: false };
+    this.options = options || { shouldIncludeErrorStack: false };
   }
 
   // MARK: - Errors

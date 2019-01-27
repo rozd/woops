@@ -5,12 +5,12 @@ export { default as woopsExceptionHandler } from './handler/exceptionHandler';
 declare global {
   namespace Express {
     interface Response {
-      woops?: Woops
+      woops?: Woops;
     }
   }
   namespace Woops {
     interface WoopsOptions {
-      shouldIncludeErrorStack?: boolean
+      shouldIncludeErrorStack?: boolean;
     }
   }
 }
@@ -23,4 +23,4 @@ export default function woops(options?: Woops.WoopsOptions): RequestHandler {
     res.woops = new Woops(res, options);
     next();
   };
-};
+}
